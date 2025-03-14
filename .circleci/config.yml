@@ -56,4 +56,11 @@ workflows:
           type: approval
           requires:
             - deploy-to-render-staging
+      - deploy-to-render-production:
+          requires:
+            - hold
+          filters:
+            branches:
+              only:
+                - main
 
