@@ -29,16 +29,18 @@ jobs:
 
 
 workflows:
-  run-tests:
+  run-tests-and-deploy-to-staging:
     jobs:
       - start-server
       - cypress/run:
           name: run-component-tests
           cypress-command: npx cypress run --component
       - deploy-to-render-staging:
+          # The requires key specifies that the deploy-to-render-staging job requires the run-e2e-tests and run-component-tests jobs to be completed before it can run. If either of the two jobs fails, the deploy-to-render-staging job will not run.
           requires:
             - run-component-tests
+          # The filters key specifies that the deploy-to-render-staging job will only run when changes are pushed to the main branch.
           filters:
             branches:
-              only: main  
+              only: main 
 
