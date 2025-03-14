@@ -15,6 +15,17 @@ jobs:
       - run:
           name: Build the app
           command: npm run build
+      - run:
+  deploy-to-render-staging:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run:
+          name: Deploy to Render Stagig
+          command: |
+            echo "Deploying to Render Staging"
+            curl $RENDER_STAGING_DEPLOYHOOK
+
 
 
 workflows:
@@ -24,3 +35,10 @@ workflows:
       - cypress/run:
           name: run-component-tests
           cypress-command: npx cypress run --component
+      - deploy-to-render-staging:
+          requires:
+            - run-component-tests
+          filters:
+            branches:
+              only: main  
+
