@@ -17,7 +17,7 @@
     "render-build": "npm install && npm run build",
     "cypress": "npx cypress open",
     "test": "npx cypress run",
-    "lint": "eslint client/src server/src --ext js,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint client/src server/src --ext js,ts,tsx --report-unused-disable-directives --max-warnings 0",
   "preview": "vite preview",
       "eslint": "eslint src"
   },
